@@ -20,12 +20,8 @@ GLuint texLava;
 GLuint texChaoInterno;
 GLuint texParedeInterna;
 GLuint texTeto;
-GLuint texSkyRight;
-GLuint texSkyLeft;
-GLuint texSkyTop;
-GLuint texSkyBottom;
-GLuint texSkyFront;
-GLuint texSkyBack;
+
+GLuint texSkydome;
 
 GLuint progSangue;
 GLuint progLava;
@@ -105,12 +101,7 @@ bool gameInit(const char *mapPath)
     texParedeInterna = gAssets.texParedeInterna;
     texTeto = gAssets.texTeto;
 
-    texSkyRight = gAssets.texSkyRight;
-    texSkyLeft = gAssets.texSkyLeft;
-    texSkyTop = gAssets.texSkyTop;
-    texSkyBottom = gAssets.texSkyBottom;
-    texSkyFront = gAssets.texSkyFront;
-    texSkyBack = gAssets.texSkyBack;
+    texSkydome = gAssets.texSkydome;
 
     progSangue = gAssets.progSangue;
     progLava = gAssets.progLava;
@@ -156,7 +147,7 @@ void gameRender()
         camX + dirX, camY + dirY, camZ + dirZ,
         0.0f, 1.0f, 0.0f);
 
-    drawSkybox(camX, camY, camZ);
+    drawSkydome(camX, camY, camZ);
 
     setSunDirectionEachFrame();
 

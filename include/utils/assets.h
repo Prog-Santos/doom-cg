@@ -12,13 +12,8 @@ struct GameAssets
     GLuint texParedeInterna = 0;
     GLuint texTeto = 0;
 
-    // skyboxes
-    GLuint texSkyRight = 0;
-    GLuint texSkyLeft = 0;
-    GLuint texSkyTop = 0;
-    GLuint texSkyBottom = 0;
-    GLuint texSkyFront = 0;
-    GLuint texSkyBack = 0;
+    // skyboxe
+    GLuint texSkydome = 0;
 
     // shaders
     GLuint progSangue = 0;
