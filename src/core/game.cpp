@@ -30,17 +30,18 @@ Level gLevel;
 
 static void setupSunLightOnce()
 {
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
     glEnable(GL_NORMALIZE);
     glShadeModel(GL_SMOOTH);
-    
+
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+
     // Ambiente global
-    GLfloat sceneAmbient[] = {0.45f, 0.45f, 0.50f, 1.0f};
+    GLfloat sceneAmbient[] = {0.45f, 0.30f, 0.25f, 1.0f};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, sceneAmbient);
 
     // Cor do sol
-    GLfloat sunDiffuse[] = {1.2f, 1.1f, 1.0f, 1.0f};
+    GLfloat sunDiffuse[] = {1.4f, 0.55f, 0.30f, 1.0f};
     GLfloat sunSpecular[] = {0.0f, 0.0f, 0.0f, 1.0f}; // sem brilho especular por enquanto
     glLightfv(GL_LIGHT0, GL_DIFFUSE, sunDiffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, sunSpecular);
@@ -52,7 +53,7 @@ static void setupSunLightOnce()
 static void setSunDirectionEachFrame()
 {
     // direção DE ONDE a luz vem (mundo). w=0 => direcional
-    GLfloat sunDir[] = { 0.3f, 1.0f, 0.2f, 0.0f };
+    GLfloat sunDir[] = {0.3f, 1.0f, 0.2f, 0.0f};
     glLightfv(GL_LIGHT0, GL_POSITION, sunDir);
 }
 
@@ -120,7 +121,7 @@ void gameRender()
         0.0f, 1.0f, 0.0f);
 
     setSunDirectionEachFrame();
- 
+
     drawLevel(gLevel.map);
 
     glutSwapBuffers();
