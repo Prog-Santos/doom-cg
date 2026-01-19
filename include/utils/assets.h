@@ -12,6 +12,9 @@ struct GameAssets
     GLuint texParedeInterna = 0;
     GLuint texTeto = 0;
 
+    // skyboxe
+    GLuint texSkydome = 0;
+
     // shaders
     GLuint progSangue = 0;
     GLuint progLava = 0;

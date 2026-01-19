@@ -6,6 +6,7 @@
 #include "core/camera.h"
 #include "input/input.h"
 #include "graphics/drawlevel.h"
+#include "graphics/skybox.h"
 #include "core/movement.h"
 
 #include <GL/glut.h>
@@ -19,6 +20,8 @@ GLuint texLava;
 GLuint texChaoInterno;
 GLuint texParedeInterna;
 GLuint texTeto;
+
+GLuint texSkydome;
 
 GLuint progSangue;
 GLuint progLava;
@@ -37,7 +40,7 @@ static void setupIndoorLightOnce()
 
     GLfloat lampSpecular[] = {0, 0, 0, 1.0f};
 
-    // Ambient frio 
+    // Ambient frio
     GLfloat lampAmbient[] = {0.98f, 0.99f, 1.41f, 1.0f};
 
     glLightfv(GL_LIGHT1, GL_DIFFUSE, lampDiffuse);
@@ -98,6 +101,8 @@ bool gameInit(const char *mapPath)
     texParedeInterna = gAssets.texParedeInterna;
     texTeto = gAssets.texTeto;
 
+    texSkydome = gAssets.texSkydome;
+
     progSangue = gAssets.progSangue;
     progLava = gAssets.progLava;
 
@@ -141,6 +146,8 @@ void gameRender()
         camX, camY, camZ,
         camX + dirX, camY + dirY, camZ + dirZ,
         0.0f, 1.0f, 0.0f);
+
+    drawSkydome(camX, camY, camZ);
 
     setSunDirectionEachFrame();
 

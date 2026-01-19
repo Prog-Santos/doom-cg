@@ -1,7 +1,8 @@
 # DoomLike Makefile
 # - Compila .o em build/
 # - Linka o executável em build/DoomLike
-# - Suporta organização em src/ e headers em include/
+# - Copia assets/maps/shaders para dentro de build/ (build portátil)
+# - make run já prepara tudo e executa
 
 CXX       := g++
 CXXFLAGS  := -g -O0 -Wall -Wextra -Iinclude
@@ -19,14 +20,12 @@ SRCS      := $(shell find $(SRC_DIR) -name '*.cpp' | sort)
 SRCS      += $(MAIN)
 
 # Converte paths em nomes de objetos dentro de build/
-# Ex:
-#   src/core/app.cpp -> build/src/core/app.o
-#   main.cpp         -> build/main.o
 OBJS      := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
-.PHONY: all clean run dirs
+.PHONY: all clean run dirs stage
 
-all: $(BUILD_DIR)/$(TARGET)
+# Build padrão já gera build pronta para rodar/entregar
+all: $(BUILD_DIR)/$(TARGET) stage
 
 $(BUILD_DIR)/$(TARGET): dirs $(OBJS)
 	$(CXX) $(LDFLAGS) $(OBJS) -o $@ $(LDLIBS)
@@ -39,8 +38,16 @@ $(BUILD_DIR)/%.o: %.cpp
 dirs:
 	@mkdir -p $(BUILD_DIR)
 
+# Copia recursos para dentro de build/ (self-contained)
+stage: dirs
+	@rm -rf $(BUILD_DIR)/assets $(BUILD_DIR)/maps $(BUILD_DIR)/shaders
+	@cp -r assets  $(BUILD_DIR)/
+	@cp -r maps    $(BUILD_DIR)/
+	@cp -r shaders $(BUILD_DIR)/
+
+# Roda SEM depender do cwd externo
 run: all
-	./$(BUILD_DIR)/$(TARGET)
+	cd $(BUILD_DIR) && ./$(TARGET)
 
 clean:
 	rm -rf $(BUILD_DIR)

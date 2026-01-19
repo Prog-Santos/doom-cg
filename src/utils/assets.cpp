@@ -13,13 +13,20 @@ bool loadAssets(GameAssets &a)
     a.texParedeInterna = carregaTextura("assets/060.png");
     a.texTeto = carregaTextura("assets/081.png");
 
+    a.texSkydome = carregaTextura("assets/Va4wUMQ.png");
+    // a.texSkydome = carregaTextura("assets/7AgU5CT.png");
+    // a.texSkydome = carregaTextura("assets/Y1m2NAI.png");
+
     a.progSangue = criaShader("shaders/blood.vert", "shaders/blood.frag");
     a.progLava = criaShader("shaders/lava.vert", "shaders/lava.frag");
 
-    if (!a.texChao || !a.texParede || !a.texSangue || !a.texLava || !a.progSangue || !a.progLava)
+    if (!a.texChao || !a.texParede || !a.texSangue || !a.texLava ||
+        !a.texChaoInterno || !a.texParedeInterna || !a.texTeto ||
+        !a.texSkydome || !a.progSangue || !a.progLava)
     {
-        std::printf("ERRO: falha ao carregar algum asset (textura/shader).\n");
+        std::printf("ERRO: falha ao carregar algum asset.\n");
         return false;
     }
+
     return true;
 }
